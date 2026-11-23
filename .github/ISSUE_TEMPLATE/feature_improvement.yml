@@ -1,0 +1,74 @@
+name: Pishcord Feature Improvement
+description: Suggest an improvement to functionality that Pishcord already provides.
+title: "[Improvement] "
+labels: ["type: improvement"]
+body:
+    - type: markdown
+      attributes:
+          value: |
+              ## Improve existing Pishcord functionality
+
+              Use this form when Pishcord already has the feature, but its behavior, settings, reliability, usability, or performance could be better. For entirely new functionality, use the **Pishcord Feature Request** form instead.
+
+              This tracker is for Pishcord-specific functionality. Requests to change unrelated upstream Vesktop behavior, Vencord plugins, or Discord itself are out of scope.
+
+    - type: input
+      id: existing-feature
+      attributes:
+          label: Existing Pishcord feature
+          description: Name the feature or setting you want to improve.
+          placeholder: e.g. DoH resolver testing, Connection Profile management, startup behavior
+      validations:
+          required: true
+
+    - type: textarea
+      id: current-behavior
+      attributes:
+          label: Current behavior
+          description: How does the feature work today, and what is unsatisfying about it?
+      validations:
+          required: true
+
+    - type: textarea
+      id: what-could-improve
+      attributes:
+          label: What could be improved
+          description: Describe the limitation, friction, or risk you are running into.
+      validations:
+          required: true
+
+    - type: textarea
+      id: proposed-behavior
+      attributes:
+          label: Proposed behavior
+          description: What should change? Include settings, defaults, labels, error handling, or edge cases where relevant.
+      validations:
+          required: true
+
+    - type: textarea
+      id: expected-benefits
+      attributes:
+          label: Expected benefits
+          description: How would this improvement help you and other Pishcord users?
+      validations:
+          required: true
+
+    - type: textarea
+      id: additional-context
+      attributes:
+          label: Additional context (optional)
+          description: Screenshots, logs, examples, related issues, or implementation notes. Remove tokens, private profile URLs, proxy credentials, and personal information first.
+      validations:
+          required: false
+
+    - type: checkboxes
+      id: confirmations
+      attributes:
+          label: Before submitting
+          options:
+              - label: I searched existing issues and this improvement has not already been suggested.
+                required: true
+              - label: This concerns functionality Pishcord already provides, not an entirely new feature.
+                required: true
+              - label: This is Pishcord-specific and not an unrelated upstream Vesktop, Vencord plugin, or Discord request.
+                required: true

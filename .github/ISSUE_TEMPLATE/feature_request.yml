@@ -1,45 +1,92 @@
-name: Feature Request
-description: Have an idea for a new feature? Request it here! No plugin requests, go to our Discord server for that
-labels: [enhancement]
-title: "[Feature] <title>"
-
+name: Pishcord Feature Request
+description: Suggest a new feature or capability for Pishcord.
+title: "[Feature] "
+labels: ["type: feature"]
 body:
     - type: markdown
       attributes:
           value: |
-              This form is not for any of the following:
-              - Plugin requests — Go to our [Discord server](https://discord.gg/D9uwnFnqmd) for that
-              - Feature requests for plugins — Go to our [Discord server](https://discord.gg/D9uwnFnqmd) for that
+              ## Pishcord feature requests
 
-    - type: textarea
-      id: feature-description
+              Use this form to propose **new functionality for Pishcord itself**, such as changes to DoH, resolver handling, connection profiles, networking, privacy, performance, configuration, or the application experience.
+
+              This tracker is **not** for:
+              - Plugin requests for Vencord — those belong to the plugin or Vencord project
+              - Features of upstream Vesktop that Pishcord does not modify
+              - Discord client features or account/server requests
+              - Support questions
+
+              Describe the problem you want to solve, not only the implementation you have in mind. That makes it easier to evaluate alternatives and edge cases.
+
+    - type: dropdown
+      id: feature-category
       attributes:
-          label: A clear and concise description of the feature you'd like to see
+          label: Feature category
+          description: Which area of Pishcord does this request relate to?
+          options:
+              - DoH and DNS
+              - Connection Profiles
+              - Networking
+              - Privacy and Security
+              - User Interface and Experience
+              - Performance
+              - Configuration
+              - Installation and Updates
+              - Other Pishcord features
       validations:
           required: true
 
     - type: textarea
-      id: implementation-notes
+      id: problem-use-case
       attributes:
-          label: Implementation Notes
-          description: If you have ideas about how this could be implemented technically, share them here
+          label: Problem or use case
+          description: What problem are you trying to solve? Describe your setup, network, or workflow and why the current behavior is not enough.
+          placeholder: On my network, I need to ... but Pishcord currently ...
       validations:
-          required: false
+          required: true
+
+    - type: textarea
+      id: proposed-solution
+      attributes:
+          label: Proposed solution
+          description: What would you like Pishcord to do? A rough idea is fine; it does not have to be a complete implementation plan.
+      validations:
+          required: true
+
+    - type: textarea
+      id: why-useful
+      attributes:
+          label: Why this would be useful
+          description: Who would benefit, and in which situations? Explain the practical value rather than only the feature itself.
+      validations:
+          required: true
+
+    - type: textarea
+      id: expected-behavior
+      attributes:
+          label: How the feature should behave
+          description: Describe the expected user experience, settings, defaults, and any important edge cases.
+      validations:
+          required: true
 
     - type: textarea
       id: additional-context
       attributes:
-          label: Additional context
-          description: Screenshots, mockups, examples from other apps, etc.
+          label: Additional context (optional)
+          description: Screenshots, mockups, examples from other tools, related issues, or technical notes.
       validations:
           required: false
 
     - type: checkboxes
-      id: agreement-check
+      id: confirmations
       attributes:
-          label: Request Agreement
+          label: Before submitting
           options:
-              - label: I've searched existing issues and this hasn't been suggested before
-              - label: This is a **core modification feature**, not a plugin request (those go in Discord)
-              - label: This feature would benefit most users, not just a specific use case
-              - label: I am willing to work on this myself
+              - label: I searched existing issues and this has not already been requested.
+                required: true
+              - label: This request is for Pishcord-specific functionality, not an upstream Vesktop or Vencord plugin feature.
+                required: true
+              - label: I described the problem or use case, not only a requested implementation.
+                required: true
+              - label: I understand this tracker is not a support channel.
+                required: true

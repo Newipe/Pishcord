@@ -1,93 +1,145 @@
-name: Bug/Crash Report
-description: Create a bug or crash report for Pishcord.
-labels: [bug]
-title: "[Bug] <title>"
-
+name: Pishcord Bug Report
+description: Report a bug caused by Pishcord's own features, integrations, or implementation.
+title: "[Bug] "
+labels: ["type: bug"]
 body:
     - type: markdown
       attributes:
           value: |
-              GitHub Issues are for development, not support!
+              ## Pishcord-only bug reports
 
-              Pishcord and Vencord are two separate things. This issue tracker is only for Pishcord. If Pishcord crashes, it is very likely an issue with Vencord, not Pishcord.
+              Use this form only when the problem is caused by **Pishcord itself** — for example its DNS-over-HTTPS integration, resolver configuration, connection profiles, proxy handling, settings, startup, packaging, or UI.
 
-              If you are experiencing any of the following issues, ask for support instead of opening an issue:
-              - Pishcord doesn't work or crashes
-              - A Vencord plugin doesn't work anymore
-              - You are having issues installing Pishcord
-              - You want to ask a question about Pishcord, Vencord or one of its plugins
+              This tracker is **not** for:
+              - Problems that also happen in upstream Vesktop and are unrelated to Pishcord changes
+              - Discord account, server, voice, or client issues that are not caused by Pishcord
+              - Third-party Vencord plugins, themes, or user scripts
+              - General support questions or installation help
+
+              Reports about upstream behavior should go to the upstream project that owns it. If you are unsure whether Pishcord caused the problem, say so in the description.
+
+    - type: dropdown
+      id: affected-feature
+      attributes:
+          label: Affected Pishcord feature
+          description: Which part of Pishcord is involved?
+          options:
+              - Native DNS over HTTPS (DoH)
+              - DNS Resolver Configuration
+              - Connection Profiles
+              - HTTPS CONNECT Proxy
+              - Profile Management
+              - Application UI
+              - Settings and Configuration
+              - Application Startup
+              - Updates and Installation
+              - Performance
+              - Other Pishcord-specific functionality
+      validations:
+          required: true
 
     - type: input
       id: pishcord-version
       attributes:
-          label: Pishcord Version
+          label: Pishcord version
+          description: You can find this in User Settings → About Pishcord, or on the release you downloaded.
           placeholder: e.g. 1.7.2
       validations:
           required: true
 
     - type: input
-      id: os
+      id: operating-system
       attributes:
-          label: Operating System
-          placeholder: e.g. Windows 11, macOS Tahoe, Fedora Linux 44 (GNOME), Arch Linux (Hyprland)
+          label: Operating system
+          description: Include the distribution or version and, on Linux, your desktop session if relevant.
+          placeholder: e.g. Windows 11 24H2, macOS 15.2, Fedora 43 (GNOME/Wayland)
+      validations:
+          required: true
+
+    - type: dropdown
+      id: installation-method
+      attributes:
+          label: Installation method
+          options:
+              - Windows installer (Setup .exe)
+              - Windows portable .zip
+              - macOS .dmg
+              - Debian/Ubuntu .deb
+              - Fedora/RHEL .rpm
+              - AppImage
+              - Built from source
+              - Other
       validations:
           required: true
 
     - type: input
-      id: install-method
+      id: installation-details
       attributes:
-          label: Install Method
-          placeholder: e.g. Setup exe, dmg, deb, rpm, AppImage
+          label: Installation details (optional)
+          description: If you selected Other, or installed through a package manager, Flatpak, or another method, describe it here.
+          placeholder: e.g. installed the .deb with apt, or built from the current main branch
+      validations:
+          required: false
+
+    - type: textarea
+      id: problem-description
+      attributes:
+          label: Description of the problem
+          description: Explain what is wrong and when it happens. Include any Pishcord settings that seem relevant.
+          placeholder: When I enable ... and then ..., Pishcord ...
       validations:
           required: true
 
     - type: textarea
-      id: bug-description
+      id: steps-to-reproduce
       attributes:
-          label: What happens when the bug or crash occurs?
-          description: Where does this bug or crash occur, when does it occur, etc.
-          placeholder: The bug/crash happens sometimes when I do ..., causing this to not work/the app to crash. I think it happens because of ...
-      validations:
-          required: true
-
-    - type: textarea
-      id: expected-behaviour
-      attributes:
-          label: What is the expected behaviour?
-          description: Simply detail what the expected behaviour is.
-          placeholder: I expect Pishcord/Discord to open the ... page instead of ..., it prevents me from doing ...
-      validations:
-          required: true
-
-    - type: textarea
-      id: steps-to-take
-      attributes:
-          label: How do you recreate this bug or crash?
-          description: Give us a list of steps in order to recreate the bug or crash.
+          label: Steps to reproduce
+          description: Give the shortest sequence that reliably shows the problem.
           placeholder: |
-              1. Do ...
-              2. Then ...
-              3. Do this ..., ... and then ...
-              4. Observe "the bug" or "the crash"
+              1. Open Settings → Pishcord → ...
+              2. Select ...
+              3. Restart Pishcord
+              4. Observe ...
       validations:
           required: true
 
     - type: textarea
-      id: crash-log
+      id: expected-behavior
       attributes:
-          label: Errors
-          render: text
-          description: Open the Developer Console with `Ctrl+Shift+i` / `Cmd+Option+i`. Then look for any red errors (Ignore network errors like Failed to load resource) and paste them. Run Pishcord from the command line to get console output and also paste that here
+          label: Expected behavior
+          description: What should Pishcord do instead?
+      validations:
+          required: true
+
+    - type: textarea
+      id: actual-behavior
+      attributes:
+          label: Actual behavior
+          description: What does Pishcord actually do? Include error messages or dialogs if there are any.
+      validations:
+          required: true
+
+    - type: textarea
+      id: screenshots-logs
+      attributes:
+          label: Screenshots or logs (optional)
+          description: |
+              Drag screenshots into this field, or paste relevant logs. For console output, run Pishcord from a terminal and copy the lines around the failure. Developer Console errors can be copied with Ctrl+Shift+I / Cmd+Option+I.
+
+              Remove personal information before submitting. Do not include authentication tokens, private profile URLs, proxy credentials, passwords, or other secrets.
       validations:
           required: false
 
     - type: checkboxes
-      id: agreement-check
+      id: confirmations
       attributes:
-          label: Request Agreement
-          description: We only accept reports for bugs that happen on official builds on Discord Stable. Canary and PTB are Development branches and may be unstable
+          label: Before submitting
           options:
-              - label: I've searched existing issues and this hasn't been reported before
-              - label: I installed Pishcord via an official method (download from the Pishcord releases page or from source), not via something like Nix packages
-              - label: This is not a support request
-              - label: I am willing to submit a fix for this myself
+              - label: I searched existing issues and this problem has not already been reported.
+                required: true
+              - label: This problem is caused by Pishcord-specific functionality, or I explain why I believe Pishcord is responsible.
+                required: true
+              - label: I understand this tracker is not for upstream Vesktop, Discord, Vencord plugin, or general support issues.
+                required: true
+              - label: I removed tokens, private profile URLs, proxy credentials, and other personal information from anything I pasted.
+                required: true

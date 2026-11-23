@@ -30,10 +30,10 @@ Pishcord builds on Vesktop, which provides:
 <table>
   <tr>
     <td align="center">
-      <img src="https://github.com/user-attachments/assets/df42c9a8-6270-46d6-929b-f0c58414a5f0" alt="Pishcord First-Launch" width="300" />
+      <img src="https://github.com/user-attachments/assets/42844cd0-35b9-4170-889d-0a5e3349bca9" alt="Pishcord First-Launch" width="300" />
     </td>
     <td align="center">
-      <img src="https://github.com/user-attachments/assets/07c7470a-9219-4b03-8358-9c756bc372aa" alt="Pishcord Settings" width="600" />
+      <img src="https://github.com/user-attachments/assets/0a72581d-58bb-467f-a4b2-31026c26742f" alt="Pishcord Settings" width="600" />
     </td>
   </tr>
 </table>

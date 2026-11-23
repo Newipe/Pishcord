@@ -81,5 +81,5 @@ export function configurePortalShortcuts() {
     if ((status.portalVersion ?? 0) >= 2) return session?.configureShortcuts();
 
     if (IS_GNOME && !openGnomeAppSettings())
-        setStatus({ ...status, error: "Failed to open GNOME Settings. Find Vesktop under Apps instead" });
+        setStatus({ ...status, error: "Failed to open GNOME Settings. Find Pishcord under Apps instead" });
 }

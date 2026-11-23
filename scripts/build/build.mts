@@ -157,7 +157,7 @@ await Promise.all([
         format: "iife",
         entryPoints: ["src/preload/rtcRelay.ts"],
         outfile: "dist/js/rtcRelay.js",
-        footer: { js: "//# sourceURL=DohcordRtcRelay" }
+        footer: { js: "//# sourceURL=PishcordRtcRelay" }
     }),
     createContext({
         ...NodeCommonOpts,

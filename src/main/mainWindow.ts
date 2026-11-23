@@ -83,7 +83,7 @@ function initMenuBar(win: BrowserWindow) {
 
     const subMenu = [
         {
-            label: "About Dohcord",
+            label: "About Pishcord",
             click: createAboutWindow
         },
         {
@@ -92,14 +92,14 @@ function initMenuBar(win: BrowserWindow) {
                 await downloadVencordFiles();
                 relaunch();
             },
-            toolTip: "Dohcord will automatically restart after this operation"
+            toolTip: "Pishcord will automatically restart after this operation"
         },
         {
-            label: "Reset Dohcord",
+            label: "Reset Pishcord",
             async click() {
                 await clearData(win);
             },
-            toolTip: "Dohcord will automatically restart after this operation"
+            toolTip: "Pishcord will automatically restart after this operation"
         },
         {
             label: "Relaunch",
@@ -182,7 +182,7 @@ function initMenuBar(win: BrowserWindow) {
 
     const menuItems = [
         {
-            label: "Dohcord",
+            label: "Pishcord",
             role: "appMenu",
             submenu: subMenu.filter(isTruthy)
         },
@@ -292,7 +292,7 @@ function initStaticTitle(win: BrowserWindow) {
 
     addSettingsListener("staticTitle", enabled => {
         if (enabled) {
-            win.setTitle("Dohcord");
+            win.setTitle("Pishcord");
             win.on("page-title-updated", listener);
         } else {
             win.off("page-title-updated", listener);
@@ -397,7 +397,7 @@ function buildBrowserWindowOptions(): BrowserWindowConstructorOptions {
     }
 
     if (staticTitle) {
-        options.title = "Dohcord";
+        options.title = "Pishcord";
     }
 
     if (process.platform === "darwin") {
@@ -505,7 +505,7 @@ const enum StartupErrorChoice {
 }
 
 export async function showStartupError(error: unknown) {
-    console.error("Failed to start Vesktop:", error);
+    console.error("Failed to start Pishcord:", error);
 
     const splash = getSplashWindow();
     const hasMainWindow = mainWin && !mainWin.isDestroyed();
@@ -517,8 +517,8 @@ export async function showStartupError(error: unknown) {
 
     const options: MessageBoxOptions = {
         type: "error",
-        message: "Vesktop failed to start",
-        detail: `${error}\n\nRepair will re-download Vencord and restart Vesktop.`,
+        message: "Pishcord failed to start",
+        detail: `${error}\n\nRepair will re-download Vencord and restart Pishcord.`,
         buttons: hasMainWindow ? ["Repair", "Quit", "Dismiss"] : ["Repair", "Quit"],
         defaultId: StartupErrorChoice.Repair,
         cancelId: hasMainWindow ? StartupErrorChoice.Dismiss : StartupErrorChoice.Quit

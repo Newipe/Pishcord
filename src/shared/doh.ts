@@ -16,7 +16,7 @@ export const DOH_OFF = "off";
 /** Sentinel value of the provider pickers for "user supplied URL" */
 export const DOH_CUSTOM = "custom";
 
-export const REMOTE_DOH_RESOLVERS_URL = "https://raw.githubusercontent.com/Newipe/Dohcord/main/resolvers.json";
+export const REMOTE_DOH_RESOLVERS_URL = "https://raw.githubusercontent.com/Newipe/Pishcord/main/resolvers.json";
 
 /**
  * Used when the remote list cannot be loaded. Keep this in sync with resolvers.json

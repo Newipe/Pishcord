@@ -6,4 +6,4 @@
 
 import { Logger } from "@vencord/types/utils";
 
-export const DohcordLogger = new Logger("Dohcord", "#d3869b");
+export const PishcordLogger = new Logger("Pishcord", "#d3869b");

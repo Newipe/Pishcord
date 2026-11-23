@@ -2,17 +2,17 @@
 
 <img src="build/icon.svg" alt="" width="88" height="88" />
 
-# Dohcord
+# Pishcord
 
 **A fast, lightweight Discord client with Vencord built in, native DNS over HTTPS and optional connection profiles.**
 
 Encrypt your DNS lookups, defeat DNS-level censorship, and stay connected on restricted networks.
 
-**Dohcord 1.7.2** adds optional [Connection Profiles](#connection-profiles): route approved Discord
+**Pishcord 1.7.2** adds optional [Connection Profiles](#connection-profiles): route approved Discord
 traffic through the built-in Newipe relay or your own compatible relay server. A profile supplies
 its own routing policy, and DoH is disabled while one is active.
 
-Dohcord builds on Vesktop, which provides:
+Pishcord builds on Vesktop, which provides:
 
 - Vencord preinstalled
 - Much more lightweight and faster than the official Discord app
@@ -22,8 +22,8 @@ Dohcord builds on Vesktop, which provides:
 
 [![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-5865F2?style=flat-square)](#installation)
 [![License](https://img.shields.io/badge/license-GPL--3.0--or--later-green?style=flat-square)](LICENSE)
-[![Release](https://img.shields.io/github/v/release/Newipe/Dohcord?style=flat-square)](../../releases/latest)
-[![Tests](https://img.shields.io/github/actions/workflow/status/Newipe/Dohcord/test.yml?style=flat-square&label=tests)](../../actions/workflows/test.yml)
+[![Release](https://img.shields.io/github/v/release/Newipe/Pishcord?style=flat-square)](../../releases/latest)
+[![Tests](https://img.shields.io/github/actions/workflow/status/Newipe/Pishcord/test.yml?style=flat-square&label=tests)](../../actions/workflows/test.yml)
 
 </div>
 
@@ -31,7 +31,7 @@ Dohcord builds on Vesktop, which provides:
 
 ## Table of Contents
 
-- [Why Dohcord](#why-dohcord)
+- [Why Pishcord](#why-pishcord)
 - [Features](#features)
 - [How DoH Works](#how-doh-works)
 - [Restricted Networks](#restricted-networks)
@@ -50,20 +50,20 @@ Dohcord builds on Vesktop, which provides:
 
 ---
 
-## Why Dohcord
+## Why Pishcord
 
-Dohcord is a desktop client for Discord, built on [Vesktop](https://github.com/Vencord/Vesktop) and
+Pishcord is a desktop client for Discord, built on [Vesktop](https://github.com/Vencord/Vesktop) and
 shipped with [Vencord](https://vencord.dev) preinstalled. It is smaller, faster and more configurable
 than the official client, and it runs natively on Windows, macOS and Linux.
 
 The difference this fork makes is in the network stack. Ordinary DNS lookups travel in plain text, so
 your ISP — or anything else on the network — can read them, spoof their answers, or block them
-outright. Dohcord can route every lookup through [DNS over HTTPS](https://en.wikipedia.org/wiki/DNS_over_HTTPS)
+outright. Pishcord can route every lookup through [DNS over HTTPS](https://en.wikipedia.org/wiki/DNS_over_HTTPS)
 instead, which wraps DNS inside a normal HTTPS connection to a resolver you choose. Lookups can no
 longer be read or tampered with in transit, and DNS-based blocking stops working.
 
 > [!NOTE]
-> Dohcord is a fork of [Vesktop](https://github.com/Vencord/Vesktop). Credit for the base client goes
+> Pishcord is a fork of [Vesktop](https://github.com/Vencord/Vesktop). Credit for the base client goes
 > to Vendicated and the Vencord contributors. This fork adds the DoH integration, the secure DNS
 > settings and the custom SNI-proxy resolver support.
 
@@ -89,7 +89,7 @@ longer be read or tampered with in transit, and DNS-based blocking stops working
 **With the system resolver — every lookup is exposed:**
 
 ```text
-   Dohcord
+   Pishcord
       │   plaintext DNS query
       ▼
 System / ISP resolver
@@ -101,7 +101,7 @@ Connection fails ✗
 **With DoH — lookups are encrypted end to end:**
 
 ```text
-   Dohcord
+   Pishcord
       │   DNS query inside HTTPS
       ▼
 DoH resolver  (Cloudflare, Google, or your own)
@@ -119,7 +119,7 @@ Connected ✓
 
 ### Implementation
 
-Dohcord hands the resolver configuration to Chromium's own host resolver, so the setting applies to
+Pishcord hands the resolver configuration to Chromium's own host resolver, so the setting applies to
 every connection the app makes and nothing else on your computer:
 
 ```ts
@@ -140,13 +140,13 @@ app.configureHostResolver({
 
 ## Restricted Networks
 
-On heavily filtered networks, Discord is often blocked at the DNS or SNI layer. Dohcord works with
+On heavily filtered networks, Discord is often blocked at the DNS or SNI layer. Pishcord works with
 DoH resolvers that answer with a **Smart DNS / SNI proxy** address, which lets you keep using Discord
 without installing a VPN.
 
-1. Dohcord asks the resolver for Discord's address over encrypted HTTPS.
+1. Pishcord asks the resolver for Discord's address over encrypted HTTPS.
 2. The resolver answers with the address of an **SNI proxy** instead of Discord's real server.
-3. Dohcord connects to that proxy, which reads the TLS SNI header and forwards the connection to
+3. Pishcord connects to that proxy, which reads the TLS SNI header and forwards the connection to
    Discord — past the local network filters.
 
 **Example resolver:**
@@ -164,16 +164,16 @@ https://newipe.qd.je/dns-query
 ## Connection Profiles
 
 A **connection profile** is an optional networking mode for Discord itself. When one is selected,
-Dohcord routes only the Discord destinations the profile allows through an HTTPS CONNECT proxy
+Pishcord routes only the Discord destinations the profile allows through an HTTPS CONNECT proxy
 and, when the profile provides one, relays Discord voice media through TURN. Other apps and the
 rest of your computer are never affected.
 
-| Choice         | What it does                                                                                                           |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| **No Profile** | Direct connection. Discord uses the same networking as a normal Discord client.                                        |
-| **Newipe**     | Built-in profile that uses Newipe's relay infrastructure. No configuration required.                                   |
-| **Newipe 2**   | Backup Newipe relay, selectable when the primary server is unreachable. No configuration required.                     |
-| **Custom**     | Your own compatible Dohcord-relay server. Only the profile name and the server's Network Configuration URL are needed. |
+| Choice         | What it does                                                                                                            |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| **No Profile** | Direct connection. Discord uses the same networking as a normal Discord client.                                         |
+| **Newipe**     | Built-in profile that uses Newipe's relay infrastructure. No configuration required.                                    |
+| **Newipe 2**   | Backup Newipe relay, selectable when the primary server is unreachable. No configuration required.                      |
+| **Custom**     | Your own compatible Pishcord-relay server. Only the profile name and the server's Network Configuration URL are needed. |
 
 A profile is **not** a VPN. Only approved Discord HTTPS and WebSocket destinations use the proxy;
 everything else keeps using your normal connection. The relay forwards Discord's already-encrypted
@@ -204,10 +204,10 @@ profile operator does not control.
 
 ### Using the Newipe profile
 
-1. Open Dohcord and either complete the first-launch setup or open **User Settings** → **Dohcord**.
+1. Open Pishcord and either complete the first-launch setup or open **User Settings** → **Pishcord**.
 2. Find **Connection Profile**.
 3. Select **Newipe**.
-4. Dohcord retrieves and validates the profile's Network Configuration automatically.
+4. Pishcord retrieves and validates the profile's Network Configuration automatically.
 5. Once the status shows **Connected**, use Discord normally.
 
 The endpoint is stored in the profile. Newipe's built-in profile uses:
@@ -230,17 +230,17 @@ proxy.
 
 ### Custom profiles
 
-Custom profiles let you use your own relay server. **Dohcord-relay is a separate server-side
-project**; Dohcord is only the client and does not run a relay for you.
+Custom profiles let you use your own relay server. **Pishcord-relay is a separate server-side
+project**; Pishcord is only the client and does not run a relay for you.
 
-1. Install and configure a compatible Dohcord-relay server.
+1. Install and configure a compatible Pishcord-relay server.
 2. Copy the **Network Configuration URL** it generates.
-3. In Dohcord, open **User Settings** → **Dohcord** → **Connection Profile**.
+3. In Pishcord, open **User Settings** → **Pishcord** → **Connection Profile**.
 4. Click **Manage Profiles** → **Add Custom Profile**.
 5. Enter a **Profile Name** and paste the **Network Configuration URL**.
 6. Click **Save Profile**, then select the new profile.
 
-Only those two values are required. Dohcord contacts the endpoint, validates the returned
+Only those two values are required. Pishcord contacts the endpoint, validates the returned
 configuration, and only then accepts the profile. If the endpoint is unreachable or returns an
 invalid or expired configuration, you get an error and can retry or pick another profile.
 
@@ -248,7 +248,7 @@ invalid or expired configuration, you get an error and can retry or pick another
 
 - **Add**, **edit** and **remove** your own custom profiles under **Manage Profiles**.
 - The built-in **Newipe** profile cannot be edited or removed.
-- Your selection is remembered after Dohcord restarts.
+- Your selection is remembered after Pishcord restarts.
 - Select **No Profile — Direct Connection** to return to normal direct networking.
 - Built-in profiles (Newipe and Newipe 2) can also be updated by changing `profiles.json` in the
   repository — no app release is needed.
@@ -274,12 +274,12 @@ response carries a versioned policy:
 }
 ```
 
-- **Dohcord keeps no production domain allowlist.** It validates this response and builds its PAC
+- **Pishcord keeps no production domain allowlist.** It validates this response and builds its PAC
   rules from it on every activation and refresh, so no compiled list or fallback list exists in the
   client.
-- **Adding or removing an allowed domain is a relay change.** Add it to Dohcord-relay's
+- **Adding or removing an allowed domain is a relay change.** Add it to Pishcord-relay's
   configuration and it starts or stops being routed after the next successful configuration refresh;
-  no Dohcord update is needed. Authorization stays on the relay, which remains authoritative.
+  no Pishcord update is needed. Authorization stays on the relay, which remains authoritative.
 - `exact` matches only that hostname. `suffix` matches the hostname and its subdomains at DNS label
   boundaries, so `discord.com` also matches `canary.discord.com` but never `notdiscord.com` or
   `discord.com.example.org`. Matching is case insensitive and ignores a trailing root dot.
@@ -292,14 +292,14 @@ response carries a versioned policy:
 
 ### Keeping built-in profiles current
 
-On startup Dohcord downloads the repository copy of `profiles.json` over HTTPS:
+On startup Pishcord downloads the repository copy of `profiles.json` over HTTPS:
 
 ```text
-https://raw.githubusercontent.com/Newipe/Dohcord/main/profiles.json
+https://raw.githubusercontent.com/Newipe/Pishcord/main/profiles.json
 ```
 
 - A built-in profile with the same id is replaced by the repository entry, so changing a relay's
-  Network Configuration URL takes effect on the next launch without a Dohcord update.
+  Network Configuration URL takes effect on the next launch without a Pishcord update.
 - New ids in that file become additional built-in profiles.
 - Packaged profiles missing from the downloaded file are kept, so a broken or truncated download
   cannot remove a profile you rely on.
@@ -307,7 +307,7 @@ https://raw.githubusercontent.com/Newipe/Dohcord/main/profiles.json
   Custom profiles are never touched.
 - The download is size limited and validated with the same rules as packaged profiles; invalid or
   non-HTTPS URLs are discarded.
-- The address is read at startup, so restart Dohcord after editing the repository copy.
+- The address is read at startup, so restart Pishcord after editing the repository copy.
 
 ### Connection behaviour
 
@@ -317,7 +317,7 @@ https://raw.githubusercontent.com/Newipe/Dohcord/main/profiles.json
   the PAC rules have no `DIRECT` fallback. Discord reports a connection error and the profile status
   shows **Unavailable**, with **Retry** available in settings. Choose **No Profile** to go back to
   direct networking.
-- If the endpoint is unreachable or returns an invalid configuration, Dohcord applies no partial
+- If the endpoint is unreachable or returns an invalid configuration, Pishcord applies no partial
   policy and no hardcoded fallback. Before a first valid policy exists it blocks Discord's HTTPS/WSS
   traffic instead of guessing. If a previously validated policy is already active, it stays in place
   untouched while the status reports the failure and retries; the next valid response replaces it
@@ -329,15 +329,15 @@ https://raw.githubusercontent.com/Newipe/Dohcord/main/profiles.json
   networking, with DoH still off.
 
 > [!WARNING]
-> If a selected profile is unavailable when Dohcord starts, Discord cannot connect until the relay
+> If a selected profile is unavailable when Pishcord starts, Discord cannot connect until the relay
 > is reachable again or you select **No Profile**. You can switch back by editing `settings.json`
 > (see [Manually, when Discord will not load](#manually-when-discord-will-not-load)) or by using
-> **Reset Dohcord** in the app menu.
+> **Reset Pishcord** in the app menu.
 
 ### Privacy and security
 
-- The connection between Dohcord and the relay is protected by TLS. The relay forwards Discord's
-  encrypted TLS connection without decrypting it; Dohcord never installs a custom CA or bypasses
+- The connection between Pishcord and the relay is protected by TLS. The relay forwards Discord's
+  encrypted TLS connection without decrypting it; Pishcord never installs a custom CA or bypasses
   certificate validation.
 - TURN provides separate relay functionality for Discord voice media.
 - DoH is not used while a profile is active: it is turned off and cannot be re-enabled until you
@@ -363,7 +363,7 @@ Prebuilt binaries are published on the **[Releases](../../releases/latest)** pag
 > [!TIP]
 > **macOS builds are unsigned,** so Gatekeeper will warn you the first time you open the app.
 > Right-click the app and choose **Open**, or allow it under _System Settings → Privacy & Security_.
-> If macOS claims the app is damaged, run `xattr -cr /Applications/Dohcord.app`.
+> If macOS claims the app is damaged, run `xattr -cr /Applications/Pishcord.app`.
 
 ---
 
@@ -380,7 +380,7 @@ are done.
 ### Any time later
 
 1. Open **User Settings** (the gear icon in the bottom-left corner).
-2. Scroll the settings sidebar down to **Dohcord**.
+2. Scroll the settings sidebar down to **Pishcord**.
 3. Find **DNS over HTTPS** and select a provider, or **Custom** for your own URL.
 
 The panel shows what is currently active:
@@ -396,21 +396,21 @@ to resolve `discord.com` through the currently applied resolver and see the addr
 
 > [!NOTE]
 > New connections pick up the new resolver immediately. Connections that are already open keep the
-> addresses they resolved earlier, so restart Dohcord if something still looks off.
+> addresses they resolved earlier, so restart Pishcord if something still looks off.
 
 ### Manually, when Discord will not load
 
 If Discord is blocked hard enough that the settings panel is out of reach, edit the config file
 directly:
 
-1. **Quit Dohcord completely.**
+1. **Quit Pishcord completely.**
 2. Open `settings.json`:
 
-    | Platform | Path                                                  |
-    | -------- | ----------------------------------------------------- |
-    | Windows  | `%appdata%\Dohcord\settings.json`                     |
-    | Linux    | `~/.config/Dohcord/settings.json`                     |
-    | macOS    | `~/Library/Application Support/Dohcord/settings.json` |
+    | Platform | Path                                                   |
+    | -------- | ------------------------------------------------------ |
+    | Windows  | `%appdata%\Pishcord\settings.json`                     |
+    | Linux    | `~/.config/Pishcord/settings.json`                     |
+    | macOS    | `~/Library/Application Support/Pishcord/settings.json` |
 
 3. Add or change these keys:
 
@@ -422,7 +422,7 @@ directly:
     }
     ```
 
-4. Save the file and start Dohcord.
+4. Save the file and start Pishcord.
 
 > [!NOTE]
 > A selected profile disables DoH regardless of these keys. Set `"profileId"` to `null` (or use
@@ -462,7 +462,7 @@ Any RFC 8484–compliant resolver works, with or without a `/dns-query` path.
 
 ## Settings Reference
 
-Dohcord stores its settings in `settings.json` inside the [data directory](#manually-when-discord-will-not-load).
+Pishcord stores its settings in `settings.json` inside the [data directory](#manually-when-discord-will-not-load).
 
 | Key                | Type      | Default | Description                                                                  |
 | ------------------ | --------- | ------- | ---------------------------------------------------------------------------- |
@@ -489,7 +489,7 @@ plus an SNI-proxying resolver. If your network blocks the resolver or the proxy 
 cannot help.
 
 **What happens if my resolver goes down?**
-With **Allow Insecure Fallback** disabled (the default) Dohcord refuses to use plain DNS, so nothing
+With **Allow Insecure Fallback** disabled (the default) Pishcord refuses to use plain DNS, so nothing
 resolves until the resolver is reachable again. Enable the fallback if you would rather stay online
 with unencrypted lookups.
 
@@ -498,7 +498,7 @@ Yes. Self-hosted resolvers are supported as long as they speak standard DoH
 (`application/dns-message`) over HTTPS. Enter the full URL under **Custom**.
 
 **Why not set DoH in my OS or on my router?**
-Setting it in Dohcord scopes the change to this app: the rest of your computer keeps using its normal
+Setting it in Pishcord scopes the change to this app: the rest of your computer keeps using its normal
 DNS, and the setting still works when the OS or router refuses to let you change DNS.
 
 **Does a profile route all my traffic through a VPN?**
@@ -516,7 +516,7 @@ They only need the Network Configuration URL and a name. TURN credentials are te
 issued by the server, so never copy them anywhere.
 
 **Does this work on any network?**
-Dohcord hides the DNS lookup and, with an SNI-proxying resolver, the address you connect to. It is
+Pishcord hides the DNS lookup and, with an SNI-proxying resolver, the address you connect to. It is
 not a full VPN: traffic patterns and IP-level blocks remain visible to your network.
 
 ---
@@ -530,36 +530,36 @@ not a full VPN: traffic patterns and IP-level blocks remain visible to your netw
 | Stuck on "Connecting…"               | The resolver is returning an address your network blocks by IP. Try a resolver that routes through a proxy, such as Newipe.                                                 |
 | **Test Resolution** fails            | The resolver is unreachable from your network. Try another provider or check your connection.                                                                               |
 | Profile shows **Unavailable**        | The relay or its configuration endpoint cannot be reached. Click **Retry**, check the relay server, or choose **No Profile**.                                               |
-| Profile shows **Invalid config**     | The endpoint returned a configuration outside Dohcord's Discord policy or with expired credentials. Fix the relay server or retry.                                          |
+| Profile shows **Invalid config**     | The endpoint returned a configuration outside Pishcord's Discord policy or with expired credentials. Fix the relay server or retry.                                         |
 | Discord will not load with a profile | The selected profile was unavailable at startup and Discord traffic is held back instead of leaking direct. Retry, or select **No Profile** in settings or `settings.json`. |
-| macOS says the app is damaged        | Gatekeeper, not corruption. Right-click → **Open**, or run `xattr -cr /Applications/Dohcord.app`.                                                                           |
+| macOS says the app is damaged        | Gatekeeper, not corruption. Right-click → **Open**, or run `xattr -cr /Applications/Pishcord.app`.                                                                          |
 
 ---
 
 ## Global Keybinds
 
-Configure them in the Vesktop settings, or from Discord's Keybinds and Voice & Video settings.
+Configure them in the Pishcord settings, or from Discord's Keybinds and Voice & Video settings.
 
-- **Windows, Linux (X11)**: Bind any keys or mouse buttons in the Vesktop keybind settings
-- **macOS**: Same as above, but Vesktop needs the Accessibility permission
-- **Linux (Wayland)**: Wayland doesn't let apps listen to global input. Enable global shortcuts in the Vesktop keybind settings and assign them in your system settings. This requires a desktop that supports the GlobalShortcuts portal, like GNOME or KDE
+- **Windows, Linux (X11)**: Bind any keys or mouse buttons in the Pishcord keybind settings
+- **macOS**: Same as above, but Pishcord needs the Accessibility permission
+- **Linux (Wayland)**: Wayland doesn't let apps listen to global input. Enable global shortcuts in the Pishcord keybind settings and assign them in your system settings. This requires a desktop that supports the GlobalShortcuts portal, like GNOME or KDE
 
 You can also trigger actions from other programs, for example your compositor's keybinds:
 
 ```sh
-vesktop --run-shortcut toggleMute
+pishcord --run-shortcut toggleMute
 # Append :down or :up to only press or release, e.g. for push to talk
-vesktop --run-shortcut pushToTalk:down
-vesktop --run-shortcut pushToTalk:up
+pishcord --run-shortcut pushToTalk:down
+pishcord --run-shortcut pushToTalk:up
 ```
 
-For lower latency, send the same commands as lines to the socket at `$XDG_RUNTIME_DIR/vesktop.sock`:
+For lower latency, send the same commands as lines to the socket at `$XDG_RUNTIME_DIR/pishcord.sock`:
 
 ```sh
-echo "run-shortcut pushToTalk:down" | socat - UNIX-CONNECT:$XDG_RUNTIME_DIR/vesktop.sock
+echo "run-shortcut pushToTalk:down" | socat - UNIX-CONNECT:$XDG_RUNTIME_DIR/pishcord.sock
 ```
 
-Run `vesktop --help` to see all actions.
+Run `pishcord --help` to see all actions.
 
 ## Building from Source
 
@@ -567,8 +567,8 @@ You need [Git](https://git-scm.com), [Node.js](https://nodejs.org) 22 or newer, 
 [pnpm](https://pnpm.io) 11 or newer (`npm install --global pnpm`).
 
 ```sh
-git clone https://github.com/Newipe/Dohcord
-cd Dohcord
+git clone https://github.com/Newipe/Pishcord
+cd Pishcord
 
 pnpm i                  # install dependencies
 
@@ -597,7 +597,7 @@ Releases are produced by [`.github/workflows/release.yml`](.github/workflows/rel
 tag matching `v*` is pushed.
 
 > [!NOTE]
-> On Linux, Vesktop uses a small C++ helper library (**LibVesktop**) to emit D-Bus events. Prebuilt
+> On Linux, Pishcord uses the upstream C++ helper library (**LibVesktop**) to emit D-Bus events. Prebuilt
 > binaries are used by default; build it yourself with `pnpm buildLibVesktop` if you have the
 > required toolchain.
 >
@@ -619,7 +619,7 @@ src/
 ├── preload/         Bridge exposed to the renderer as VesktopNative
 │   ├── rtcRelay.ts  Wraps Discord's real RTCPeerConnection for the RTC relay
 │   └── index.ts
-├── renderer/        Vencord plugins and the Dohcord settings UI
+├── renderer/        Vencord plugins and the Pishcord settings UI
 │   └── components/settings/
 │       ├── Profiles.tsx
 │       └── DoH.tsx

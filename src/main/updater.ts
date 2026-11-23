@@ -52,7 +52,7 @@ function openUpdater(update: UpdateInfo) {
     }
 
     updaterWindow = new BrowserWindow({
-        title: "Dohcord Updater",
+        title: "Pishcord Updater",
         autoHideMenuBar: true,
         webPreferences: {
             preload: join(__dirname, "updaterPreload.js")

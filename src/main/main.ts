@@ -37,7 +37,7 @@ import { setAsDefaultProtocolClient } from "./utils/setAsDefaultProtocolClient";
 import { showWindow } from "./utils/showWindow";
 import { isDeckGameMode } from "./utils/steamOS";
 
-console.log("Dohcord v" + app.getVersion());
+console.log("Pishcord v" + app.getVersion());
 
 // Make the Vencord files use our DATA_DIR
 process.env.VENCORD_USER_DATA_DIR = DATA_DIR;
@@ -137,7 +137,7 @@ function init() {
     });
 
     app.whenReady().then(async () => {
-        if (process.platform === "win32") app.setAppUserModelId("dev.newipe.dohcord");
+        if (process.platform === "win32") app.setAppUserModelId("dev.newipe.pishcord");
 
         registerScreenShareHandler();
         registerMediaPermissionsHandler();
@@ -176,14 +176,14 @@ const runShortcut = CommandLine.values["run-shortcut"];
 
 if (!app.requestSingleInstanceLock({ IS_DEV, runShortcut })) {
     if (IS_DEV && !runShortcut) {
-        console.log("Dohcord is already running. Quitting previous instance...");
+        console.log("Pishcord is already running. Quitting previous instance...");
         init();
     } else {
-        console.log("Dohcord is already running. Quitting...");
+        console.log("Pishcord is already running. Quitting...");
         app.quit();
     }
 } else if (runShortcut) {
-    console.error("Dohcord is not running, so --run-shortcut has no effect");
+    console.error("Pishcord is not running, so --run-shortcut has no effect");
     app.exit(1);
 } else {
     init();

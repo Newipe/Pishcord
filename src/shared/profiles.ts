@@ -10,7 +10,7 @@ import { parseDeclaredExpiry, parseRtcRelayCredentials, type RtcIceServer } from
  * Connection profiles describe a selective HTTPS CONNECT proxy for Discord
  * traffic and, optionally, a TURN relay for Discord voice. Everything the client
  * applies comes from the profile's own Network Configuration endpoint, which is
- * also the only source of the routing policy. Dohcord keeps no production copy
+ * also the only source of the routing policy. Pishcord keeps no production copy
  * of the allowed domains.
  *
  * DoH is a separate system: it is only available in Direct Connection and is
@@ -29,16 +29,16 @@ export const MAX_PROFILE_NAME_LENGTH = 64;
 export const MAX_NETWORK_CONFIG_URL_LENGTH = 512;
 export const MAX_ROUTING_DOMAINS = 64;
 export const MAX_PORT_RANGES_PER_DOMAIN = 16;
-/** Largest Network Configuration response Dohcord will read */
+/** Largest Network Configuration response Pishcord will read */
 export const MAX_NETWORK_CONFIG_BYTES = 64 * 1024;
-/** Largest built-in profile list Dohcord will read */
+/** Largest built-in profile list Pishcord will read */
 export const MAX_PROFILES_FILE_BYTES = 32 * 1024;
 
 /**
  * The repository copy of profiles.json. Built-in profiles are refreshed from here
  * on startup so a relay address can change without shipping a new app version.
  */
-export const REMOTE_PROFILES_URL = "https://raw.githubusercontent.com/Newipe/Dohcord/main/profiles.json";
+export const REMOTE_PROFILES_URL = "https://raw.githubusercontent.com/Newipe/Pishcord/main/profiles.json";
 
 /**
  * Used by the PAC script when a destination matches the policy but its port is
@@ -240,7 +240,7 @@ function parseProfileList(value: unknown, type: ConnectionProfile["type"]): Conn
 /**
  * Parses and validates an untrusted Network Configuration response.
  *
- * The relay is the authoritative source of the routing policy; Dohcord only
+ * The relay is the authoritative source of the routing policy; Pishcord only
  * checks that the response is well formed and safe to turn into PAC rules.
  */
 export function parseNetworkConfig(value: unknown, now = Date.now()): NetworkConfigResult {
@@ -516,25 +516,25 @@ export function buildPacScript(config: ProfileNetworkConfig): string {
         ranges: domain.portRanges.map(range => [range.from, range.to])
     }));
 
-    return `/* Dohcord connection profile */
-var DOHCORD_PROXY = ${JSON.stringify(proxy)};
-var DOHCORD_REJECT = ${JSON.stringify(PAC_REJECT_PROXY)};
-var DOHCORD_RULES = ${JSON.stringify(rules)};
+    return `/* Pishcord connection profile */
+var PISHCORD_PROXY = ${JSON.stringify(proxy)};
+var PISHCORD_REJECT = ${JSON.stringify(PAC_REJECT_PROXY)};
+var PISHCORD_RULES = ${JSON.stringify(rules)};
 
-function dohcordNormalizeHost(host) {
+function pishcordNormalizeHost(host) {
     host = host.toLowerCase();
     while (host.length > 1 && host.charAt(host.length - 1) === ".") host = host.substring(0, host.length - 1);
     return host;
 }
 
-function dohcordMatches(host, rule) {
+function pishcordMatches(host, rule) {
     if (host === rule.host) return true;
     if (rule.exact) return false;
     if (host.length <= rule.host.length) return false;
     return host.substring(host.length - rule.host.length - 1) === "." + rule.host;
 }
 
-function dohcordPort(url) {
+function pishcordPort(url) {
     var schemeEnd = url.indexOf("://");
     if (schemeEnd < 0) return 0;
 
@@ -563,7 +563,7 @@ function dohcordPort(url) {
     return colon >= 0 ? parseInt(authority.substring(colon + 1), 10) || 0 : 443;
 }
 
-function dohcordPortAllowed(port, rule) {
+function pishcordPortAllowed(port, rule) {
     for (var i = 0; i < rule.ranges.length; i++) {
         if (port >= rule.ranges[i][0] && port <= rule.ranges[i][1]) return true;
     }
@@ -578,15 +578,15 @@ function FindProxyForURL(url, host) {
     var scheme = url.substring(0, schemeEnd).toLowerCase();
     if (scheme !== "https" && scheme !== "wss") return "DIRECT";
 
-    host = dohcordNormalizeHost(host);
-    var port = dohcordPort(url);
-    if (!port) return DOHCORD_REJECT;
+    host = pishcordNormalizeHost(host);
+    var port = pishcordPort(url);
+    if (!port) return PISHCORD_REJECT;
 
-    for (var i = 0; i < DOHCORD_RULES.length; i++) {
-        var rule = DOHCORD_RULES[i];
-        if (!dohcordMatches(host, rule)) continue;
+    for (var i = 0; i < PISHCORD_RULES.length; i++) {
+        var rule = PISHCORD_RULES[i];
+        if (!pishcordMatches(host, rule)) continue;
 
-        return dohcordPortAllowed(port, rule) ? DOHCORD_PROXY : DOHCORD_REJECT;
+        return pishcordPortAllowed(port, rule) ? PISHCORD_PROXY : PISHCORD_REJECT;
     }
 
     return "DIRECT";
@@ -601,8 +601,8 @@ function FindProxyForURL(url, host) {
  * local tooling keeps working.
  */
 export function buildUnavailablePacScript(): string {
-    return `/* Dohcord connection profile: configuration unavailable */
-var DOHCORD_REJECT = ${JSON.stringify(PAC_REJECT_PROXY)};
+    return `/* Pishcord connection profile: configuration unavailable */
+var PISHCORD_REJECT = ${JSON.stringify(PAC_REJECT_PROXY)};
 
 function FindProxyForURL(url, host) {
     var schemeEnd = url.indexOf(":");
@@ -616,7 +616,7 @@ function FindProxyForURL(url, host) {
 
     if (host === "localhost" || host === "127.0.0.1" || host === "::1") return "DIRECT";
 
-    return DOHCORD_REJECT;
+    return PISHCORD_REJECT;
 }
 `;
 }

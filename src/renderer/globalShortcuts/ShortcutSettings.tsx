@@ -131,7 +131,7 @@ function HookKeybinds({ status }: { status: KeybindStatus }) {
             {status.needsPermission && (
                 <Card variant="warning" className={cl("card")}>
                     <Text size="md">
-                        Vesktop needs the Accessibility permission to detect your keybinds while it is not focused.
+                        Pishcord needs the Accessibility permission to detect your keybinds while it is not focused.
                     </Text>
                     <Button size="small" onClick={() => VesktopNative.keybinds.requestPermission()}>
                         Grant Permission
@@ -181,7 +181,7 @@ function PortalKeybinds({ status }: { status: KeybindStatus }) {
         <>
             <FormSwitch
                 title="Enable global shortcuts"
-                description="Registers Vesktop's actions with your desktop environment, which lets you assign shortcuts to them. Your system may ask you to set them up."
+                description="Registers Pishcord's actions with your desktop environment, which lets you assign shortcuts to them. Your system may ask you to set them up."
                 value={!!settings.globalShortcutsPortal}
                 onChange={v => (settings.globalShortcutsPortal = v)}
                 hideBorder
@@ -271,9 +271,9 @@ function ExternalTriggers() {
                 <CodeBlock
                     lang="sh"
                     content={[
-                        "vesktop --run-shortcut toggleMute",
-                        "vesktop --run-shortcut pushToTalk:down",
-                        "vesktop --run-shortcut pushToTalk:up"
+                        "pishcord --run-shortcut toggleMute",
+                        "pishcord --run-shortcut pushToTalk:down",
+                        "pishcord --run-shortcut pushToTalk:up"
                     ].join("\n")}
                 />
             </div>

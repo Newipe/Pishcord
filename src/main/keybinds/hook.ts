@@ -83,7 +83,7 @@ function hookError(message: string) {
 function startFlatpakHook() {
     // libuiohook can deadlock with Zypak's host preload during dlopen.
     const child = utilityProcess.fork(join(__dirname, "hookProcess.js"), [], {
-        serviceName: "Vesktop Global Keybinds"
+        serviceName: "Pishcord Global Keybinds"
     });
 
     function fail(message: string) {

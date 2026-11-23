@@ -12,17 +12,26 @@ import { app } from "electron";
 
 import { CommandLine } from "./cli";
 
-const dohcordDir = dirname(process.execPath);
+const APP_NAME = "Pishcord";
+
+// Electron derives appData paths from the app name, so set it explicitly before
+// any path is resolved. This keeps the Linux/macOS directory capitalised.
+app.setName(APP_NAME);
+if (!process.env.VENCORD_USER_DATA_DIR) {
+    app.setPath("userData", join(app.getPath("appData"), APP_NAME));
+}
+
+const pishcordDir = dirname(process.execPath);
 
 export const PORTABLE =
     process.platform === "win32" &&
     !process.execPath.toLowerCase().endsWith("electron.exe") &&
-    !existsSync(join(dohcordDir, "Uninstall Dohcord.exe"));
+    !existsSync(join(pishcordDir, "Uninstall Pishcord.exe"));
 
 export const DATA_DIR =
-    process.env.VENCORD_USER_DATA_DIR || (PORTABLE ? join(dohcordDir, "Data") : join(app.getPath("userData")));
+    process.env.VENCORD_USER_DATA_DIR || (PORTABLE ? join(pishcordDir, "Data") : join(app.getPath("userData")));
 
-// Written by "Reset Vesktop". Our data is deleted here on the next start, before anything uses it
+// Written by "Reset Pishcord". Our data is deleted here on the next start, before anything uses it
 export const RESET_MARKER_FILE = join(DATA_DIR, ".reset-pending");
 if (existsSync(RESET_MARKER_FILE)) {
     try {
@@ -31,7 +40,7 @@ if (existsSync(RESET_MARKER_FILE)) {
         }
         rmSync(RESET_MARKER_FILE);
     } catch (err) {
-        console.error("Failed to reset Vesktop data:", err);
+        console.error("Failed to reset Pishcord data:", err);
     }
 }
 
@@ -46,7 +55,7 @@ export const VENCORD_QUICKCSS_FILE = join(VENCORD_SETTINGS_DIR, "quickCss.css");
 export const VENCORD_SETTINGS_FILE = join(VENCORD_SETTINGS_DIR, "settings.json");
 export const VENCORD_THEMES_DIR = join(DATA_DIR, "themes");
 
-export const USER_AGENT = `Dohcord/${app.getVersion()} (https://github.com/Newipe/Dohcord)`;
+export const USER_AGENT = `Pishcord/${app.getVersion()} (https://github.com/Newipe/Pishcord)`;
 
 // dimensions shamelessly stolen from Discord Desktop :3
 export const MIN_WIDTH = 940;
@@ -79,15 +88,15 @@ export const IS_WAYLAND =
     process.platform === "linux" && (process.env.XDG_SESSION_TYPE === "wayland" || !!process.env.WAYLAND_DISPLAY);
 
 function getSocketPath() {
-    if (process.platform === "win32") return `\\\\.\\pipe\\vesktop-${userInfo().username}`;
+    if (process.platform === "win32") return `\\\\.\\pipe\\pishcord-${userInfo().username}`;
 
     const { XDG_RUNTIME_DIR, FLATPAK_ID } = process.env;
-    if (!XDG_RUNTIME_DIR) return join(tmpdir(), `vesktop-${userInfo().uid}.sock`);
+    if (!XDG_RUNTIME_DIR) return join(tmpdir(), `pishcord-${userInfo().uid}.sock`);
 
     // Only $XDG_RUNTIME_DIR/app/$FLATPAK_ID is shared with the host
     return FLATPAK_ID
-        ? join(XDG_RUNTIME_DIR, "app", FLATPAK_ID, "vesktop.sock")
-        : join(XDG_RUNTIME_DIR, "vesktop.sock");
+        ? join(XDG_RUNTIME_DIR, "app", FLATPAK_ID, "pishcord.sock")
+        : join(XDG_RUNTIME_DIR, "pishcord.sock");
 }
 
 export const SOCKET_PATH = getSocketPath();

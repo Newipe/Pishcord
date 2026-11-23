@@ -7,7 +7,7 @@
 declare global {
     interface Window {
         /** Main-world integration installed by the preload on Discord pages */
-        __dohcordRtcRelay?: import("shared/rtcRelay").DohcordRtcRelay;
+        __pishcordRtcRelay?: import("shared/rtcRelay").PishcordRtcRelay;
     }
 
     export var VesktopNative: typeof import("preload/VesktopNative").VesktopNative;

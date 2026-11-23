@@ -12,7 +12,7 @@ import { STATIC_DIR } from "shared/paths";
 import { IS_FLATPAK } from "./constants";
 
 // Name of our .desktop file, which portals and GNOME identify us by
-const APP_ID = process.env.FLATPAK_ID ?? "vesktop";
+const APP_ID = process.env.FLATPAK_ID ?? "pishcord";
 
 let libVesktop: typeof import("libvesktop") | null = null;
 

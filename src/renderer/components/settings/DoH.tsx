@@ -207,7 +207,7 @@ export const DoH: SettingsComponent = ({ settings }) => {
 
                 <FormSwitch
                     title="Allow Insecure Fallback"
-                    description="Use plain DNS when the DoH server cannot be reached. Disabling this guarantees encrypted lookups, but Dohcord will have no DNS at all while the resolver is down."
+                    description="Use plain DNS when the DoH server cannot be reached. Disabling this guarantees encrypted lookups, but Pishcord will have no DNS at all while the resolver is down."
                     value={settings.dohAllowFallback}
                     onChange={value => (settings.dohAllowFallback = value)}
                     disabled={!enabled}
@@ -238,7 +238,7 @@ export const DoH: SettingsComponent = ({ settings }) => {
                 </div>
 
                 <Paragraph>
-                    Changes apply to new connections immediately. Restart Dohcord to refresh connections that are
+                    Changes apply to new connections immediately. Restart Pishcord to refresh connections that are
                     already open.
                 </Paragraph>
             </Card>

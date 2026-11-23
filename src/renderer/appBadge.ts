@@ -7,7 +7,7 @@
 import { filters, waitFor } from "@vencord/types/webpack";
 import { RelationshipStore } from "@vencord/types/webpack/common";
 
-import { DohcordLogger } from "./logger";
+import { PishcordLogger } from "./logger";
 import { Settings } from "./settings";
 
 let GuildReadStateStore: any;
@@ -27,7 +27,7 @@ export function setBadge() {
 
         VesktopNative.app.setBadgeCount(totalCount);
     } catch (e) {
-        DohcordLogger.error("Failed to update badge count", e);
+        PishcordLogger.error("Failed to update badge count", e);
     }
 }
 

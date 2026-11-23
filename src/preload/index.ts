@@ -25,14 +25,14 @@ function initRtcRelay() {
         const snapshot = ipcRenderer.sendSync(IpcEvents.RTC_RELAY_SNAPSHOT);
 
         webFrame
-            .executeJavaScript(`${source}\n;window.__dohcordRtcRelay?.update(${JSON.stringify(snapshot)});`)
+            .executeJavaScript(`${source}\n;window.__pishcordRtcRelay?.update(${JSON.stringify(snapshot)});`)
             .catch(err => console.error("Failed to install the RTC relay integration", err));
     } catch (err) {
         console.error("Failed to install the RTC relay integration", err);
     }
 
     ipcRenderer.on(IpcEvents.RTC_RELAY_UPDATE, (_event, snapshot) => {
-        webFrame.executeJavaScript(`window.__dohcordRtcRelay?.update(${JSON.stringify(snapshot)});`).catch(() => {});
+        webFrame.executeJavaScript(`window.__pishcordRtcRelay?.update(${JSON.stringify(snapshot)});`).catch(() => {});
     });
 }
 
@@ -132,6 +132,6 @@ async function checkDiscordStartup() {
 }
 
 Promise.all([checkDiscordStartup(), loadRenderer()]).catch(error => {
-    console.error("Failed to initialize the Vesktop renderer:", error);
+    console.error("Failed to initialize the Pishcord renderer:", error);
     return ipcRenderer.invoke(IpcEvents.RENDERER_STARTUP_ERROR, String(error));
 });

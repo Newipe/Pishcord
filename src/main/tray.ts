@@ -53,7 +53,7 @@ async function waitForStatusNotifierHost() {
     }
 
     console.warn(
-        "StatusNotifierHost not registered after 30 seconds. Vesktop's Tray will likely not function correctly.\n" +
+        "StatusNotifierHost not registered after 30 seconds. Pishcord's Tray will likely not function correctly.\n" +
             "If you are on GNOME, make sure you installed & enabled the AppIndicator and KStatusNotifierItem Support extension:\n" +
             "https://extensions.gnome.org/extension/615/appindicator-support/"
     );
@@ -84,7 +84,7 @@ export async function initTray(win: BrowserWindow, setIsQuitting: (val: boolean)
             }
         },
         {
-            label: "Reset Dohcord",
+            label: "Reset Pishcord",
             async click() {
                 await clearData(win);
             }
@@ -109,7 +109,7 @@ export async function initTray(win: BrowserWindow, setIsQuitting: (val: boolean)
     if (Settings.store.tray === false) return;
 
     tray = new Tray(await resolveAssetPath(trayVariant));
-    tray.setToolTip("Dohcord");
+    tray.setToolTip("Pishcord");
     tray.setContextMenu(trayMenu);
     tray.on("click", onTrayClick);
 }

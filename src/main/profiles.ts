@@ -50,7 +50,7 @@ const EXPIRY_REFRESH_MIN_MS = 5_000;
 const RETRY_BASE_MS = 15_000;
 const RETRY_MAX_MS = 5 * 60_000;
 /** Isolated in-memory session used to retrieve Network Configurations */
-const CONFIG_SESSION = "dohcord-profile-config";
+const CONFIG_SESSION = "pishcord-profile-config";
 
 let packagedProfiles: ConnectionProfile[] = [];
 let customProfiles: ConnectionProfile[] = [];
@@ -566,7 +566,7 @@ async function checkProxy(ses: Electron.Session): Promise<{ ok: true } | { ok: f
         if (response.status === 407) {
             return {
                 ok: false,
-                error: "The proxy requires authentication, which Dohcord connection profiles do not support"
+                error: "The proxy requires authentication, which Pishcord connection profiles do not support"
             };
         }
 

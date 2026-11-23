@@ -40,7 +40,9 @@ export const Profiles: SettingsComponent = ({ settings }) => {
     const [initial] = useState(() => VesktopNative.profiles.list());
     const [profiles, setProfiles] = useState<ConnectionProfile[]>(initial.profiles);
     const [status, setStatus] = useState<ProfileStatus>(initial.status);
-    const [rtcStatus, setRtcStatus] = useState<RtcRelayStatus | undefined>(() => window.__dohcordRtcRelay?.getStatus());
+    const [rtcStatus, setRtcStatus] = useState<RtcRelayStatus | undefined>(() =>
+        window.__pishcordRtcRelay?.getStatus()
+    );
 
     const [managing, setManaging] = useState(false);
     const [editing, setEditing] = useState<string | undefined>();
@@ -338,7 +340,7 @@ export const Profiles: SettingsComponent = ({ settings }) => {
                         )}
 
                         <Text tag="span" size="xs" defaultColor={false} className={cl("hint")}>
-                            Dohcord-relay is a separate server-side project. Copy the Network Configuration URL it
+                            Pishcord-relay is a separate server-side project. Copy the Network Configuration URL it
                             prints after setup.
                         </Text>
                     </div>

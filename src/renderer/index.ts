@@ -16,20 +16,20 @@ export * as Components from "./components";
 import { VesktopSettingsIcon } from "@vencord/types/components";
 
 import SettingsUi from "./components/settings/Settings";
-import { DohcordLogger } from "./logger";
+import { PishcordLogger } from "./logger";
 import { Settings } from "./settings";
 export { Settings };
 
-DohcordLogger.log("read if cute :3");
-DohcordLogger.log("Dohcord v" + VesktopNative.app.getVersion());
+PishcordLogger.log("read if cute :3");
+PishcordLogger.log("Pishcord v" + VesktopNative.app.getVersion());
 
 const SettingsPlugin = Vencord.Plugins.plugins
     .Settings as typeof import("@vencord/types/plugins/_core/settings").default;
 
 SettingsPlugin.customEntries.push({
-    key: "dohcord",
-    title: "Dohcord",
-    panelTitle: "Dohcord Settings",
+    key: "pishcord",
+    title: "Pishcord",
+    panelTitle: "Pishcord Settings",
     Component: SettingsUi,
     Icon: VesktopSettingsIcon
 });

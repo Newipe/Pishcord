@@ -54,13 +54,13 @@ export interface RtcRelayStatus {
 }
 
 /** API the integration exposes to the Discord page */
-export interface DohcordRtcRelay {
+export interface PishcordRtcRelay {
     update(snapshot: RtcRelaySnapshot): void;
     getStatus(): RtcRelayStatus;
 }
 
 /** Dispatched on window every time {@link RtcRelayStatus} changes */
-export const RTC_RELAY_STATUS_EVENT = "dohcord-rtc-relay-status";
+export const RTC_RELAY_STATUS_EVENT = "pishcord-rtc-relay-status";
 
 /** Cached credentials are refreshed this long before they expiry */
 export const RTC_RELAY_EXPIRY_MARGIN_MS = 60_000;
@@ -79,7 +79,7 @@ export type RtcRelayCredentialsResult = ({ ok: true } & RtcRelayCredentials) | {
  * Validates the credential endpoint response. The iceServers array is passed on as
  * returned, only known fields are kept so nothing else reaches Chromium.
  *
- * The temporary username has the coturn REST format `<EXPIRATION_TIMESTAMP>:Dohcord`,
+ * The temporary username has the coturn REST format `<EXPIRATION_TIMESTAMP>:Pishcord`,
  * which is where the expiry is read from. Nothing is assumed about the password.
  */
 export function parseRtcRelayCredentials(value: unknown, now = Date.now()): RtcRelayCredentialsResult {

@@ -49,7 +49,7 @@ SCRIPT_DIR="$( cd "$( dirname "\${BASH_SOURCE[0]}" )" && pwd )"
 ARGS=()
 
 if [[ "$SteamOS" == "1" && "$SteamGamepadUI" == "1" ]]; then
-    echo "Running Vesktop on SteamOS, disabling sandbox"
+    echo "Running Pishcord on SteamOS, disabling sandbox"
     ARGS+=(--no-sandbox)
 fi
 

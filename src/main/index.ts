@@ -10,11 +10,11 @@ import { CommandLine } from "./cli";
 import { downloadVencordFiles } from "./utils/vencordLoader";
 
 if (CommandLine.values.repair) {
-    console.log("Repairing Dohcord...");
+    console.log("Repairing Pishcord...");
     downloadVencordFiles()
         .then(() => app.quit())
         .catch(err => {
-            console.error("Failed to repair Dohcord:", err);
+            console.error("Failed to repair Pishcord:", err);
             app.exit(1);
         });
 } else {

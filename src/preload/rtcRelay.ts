@@ -12,7 +12,7 @@
  */
 
 import {
-    type DohcordRtcRelay,
+    type PishcordRtcRelay,
     RTC_RELAY_EXPIRY_MARGIN_MS,
     RTC_RELAY_STATUS_EVENT,
     type RtcIceServer,
@@ -47,12 +47,12 @@ const BACKOFF_BASE_MS = 30_000;
 const BACKOFF_MAX_MS = 10 * 60_000;
 const MAX_ICE_SERVERS = 16;
 
-(function installDohcordRtcRelay() {
+(function installPishcordRtcRelay() {
     const win = window as any;
 
     // Every navigation and renderer restart runs this again; never stack wrappers
-    if (win.__dohcordRtcRelayInstalled) return;
-    win.__dohcordRtcRelayInstalled = true;
+    if (win.__pishcordRtcRelayInstalled) return;
+    win.__pishcordRtcRelayInstalled = true;
 
     const nativeRTCPeerConnection = win.RTCPeerConnection as typeof RTCPeerConnection | undefined;
     if (typeof nativeRTCPeerConnection !== "function") return;
@@ -208,7 +208,7 @@ const MAX_ICE_SERVERS = 16;
 
         status = next;
 
-        Object.defineProperty(win, "__dohcordRtcRelayStatus", {
+        Object.defineProperty(win, "__pishcordRtcRelayStatus", {
             value: Object.freeze({ ...next }),
             enumerable: false,
             configurable: true
@@ -278,7 +278,7 @@ const MAX_ICE_SERVERS = 16;
                 iceTransportPolicy: entry.originalConfig?.iceTransportPolicy ?? "all"
             });
         } catch (err) {
-            console.warn("[Dohcord RTC] Could not restore Discord's PeerConnection configuration", err);
+            console.warn("[Pishcord RTC] Could not restore Discord's PeerConnection configuration", err);
         }
 
         try {
@@ -298,7 +298,7 @@ const MAX_ICE_SERVERS = 16;
         retryAfter = Date.now() + Math.min(BACKOFF_BASE_MS * 2 ** (failureCount - 1), BACKOFF_MAX_MS);
 
         console.warn(
-            `[Dohcord RTC] ${reason} — using direct RTC, next relay attempt in ${Math.round((retryAfter - Date.now()) / 1000)}s`
+            `[Pishcord RTC] ${reason} — using direct RTC, next relay attempt in ${Math.round((retryAfter - Date.now()) / 1000)}s`
         );
     }
 
@@ -379,7 +379,7 @@ const MAX_ICE_SERVERS = 16;
         if (relayed && !entry.logged) {
             entry.logged = true;
             console.info(
-                `[Dohcord RTC] Relay confirmed via ${relayHost() ?? "the relay"}: candidate=${local?.candidateType}, ` +
+                `[Pishcord RTC] Relay confirmed via ${relayHost() ?? "the relay"}: candidate=${local?.candidateType}, ` +
                     `protocol=${local?.protocol ?? pair.protocol ?? "?"}, ` +
                     `${bytesSent} bytes up / ${bytesReceived} bytes down, ` +
                     `${lastStats.rttMs ?? "?"} ms RTT`
@@ -542,12 +542,12 @@ const MAX_ICE_SERVERS = 16;
         publish(lastStats);
     }
 
-    const api: DohcordRtcRelay = {
+    const api: PishcordRtcRelay = {
         update,
         getStatus: () => status
     };
 
-    Object.defineProperty(win, "__dohcordRtcRelay", {
+    Object.defineProperty(win, "__pishcordRtcRelay", {
         value: Object.freeze(api),
         enumerable: false,
         configurable: false,

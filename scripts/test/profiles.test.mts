@@ -287,7 +287,7 @@ const turnConfig = parsed({
         iceServers: [
             {
                 urls: "turn:13.48.52.216:3478?transport=udp",
-                username: `${Math.floor((Date.now() + 3_600_000) / 1000)}:dohcord`,
+                username: `${Math.floor((Date.now() + 3_600_000) / 1000)}:pishcord`,
                 credential: credentials
             }
         ],
@@ -303,7 +303,7 @@ assert.ok(!buildPacScript(turnConfig).includes("turn:"), "TURN must stay out of 
 /* Built-in profiles are refreshed from the repository               */
 /* ---------------------------------------------------------------- */
 
-assert.ok(REMOTE_PROFILES_URL.endsWith("/Newipe/Dohcord/main/profiles.json"));
+assert.ok(REMOTE_PROFILES_URL.endsWith("/Newipe/Pishcord/main/profiles.json"));
 
 const packaged = parsePackagedProfiles([
     {

@@ -1,10 +1,16 @@
 {
-    "name": "dohcord",
+    "name": "pishcord",
     "version": "1.7.2",
+    "productName": "Pishcord",
+    "desktopName": "pishcord.desktop",
     "private": true,
-    "description": "Dohcord is a custom Discord desktop app with native DNS over HTTPS",
+    "description": "Pishcord is a custom Discord desktop app with native DNS over HTTPS and connection profiles",
     "keywords": [],
-    "homepage": "https://vencord.dev",
+    "homepage": "https://github.com/Newipe/Pishcord",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Newipe/Pishcord.git"
+    },
     "license": "GPL-3.0-or-later",
     "author": "Vendicated <vendicated@riseup.net>",
     "main": "dist/js/main.js",
@@ -59,9 +65,9 @@
         "pnpm": ">=11"
     },
     "build": {
-        "appId": "dev.newipe.dohcord",
-        "productName": "Dohcord",
-        "executableName": "dohcord",
+        "appId": "dev.newipe.pishcord",
+        "productName": "Pishcord",
+        "executableName": "pishcord",
         "files": [
             "!*",
             "!node_modules",
@@ -117,15 +123,16 @@
                     ]
                 }
             ],
+            "syncDesktopName": true,
             "desktop": {
                 "entry": {
-                    "Name": "Dohcord",
+                    "Name": "Pishcord",
                     "GenericName": "Internet Messenger",
                     "Type": "Application",
                     "Categories": "Network;InstantMessaging;Chat;",
                     "Keywords": "discord;vencord;electron;chat;",
                     "MimeType": "x-scheme-handler/discord",
-                    "StartupWMClass": "dohcord"
+                    "StartupWMClass": "pishcord"
                 }
             }
         },

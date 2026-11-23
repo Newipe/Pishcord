@@ -2,7 +2,7 @@
 <meta charset="utf-8" />
 
 <head>
-    <title>Dohcord Setup</title>
+    <title>Pishcord Setup</title>
 
     <link rel="stylesheet" href="./common.css" type="text/css" />
 
@@ -382,7 +382,7 @@
 
 <body>
     <header>
-        <h1>Welcome to Dohcord</h1>
+        <h1>Welcome to Pishcord</h1>
         <p>Let's get your client set up. You can change any of this later in Settings.</p>
     </header>
 
@@ -390,7 +390,7 @@
         <label>
             <div>
                 <h2>Start with System</h2>
-                <span>Automatically open Dohcord when your computer starts</span>
+                <span>Automatically open Pishcord when your computer starts</span>
             </div>
             <input type="checkbox" name="autoStart" />
         </label>
@@ -414,7 +414,7 @@
         <label>
             <div>
                 <h2>Minimise to Tray</h2>
-                <span>Keep Dohcord running in the tray when the window is closed</span>
+                <span>Keep Pishcord running in the tray when the window is closed</span>
             </div>
             <input type="checkbox" name="minimizeToTray" checked />
         </label>
@@ -495,7 +495,7 @@
         </label>
 
         <div id="buttons">
-            <footer>Dohcord encrypts DNS only. Messages stay encrypted end to end by Discord.</footer>
+            <footer>Pishcord encrypts DNS only. Messages stay encrypted end to end by Discord.</footer>
             <button type="button" id="cancel">Quit</button>
             <button type="submit" id="submit">Get Started</button>
         </div>
@@ -512,7 +512,7 @@
     const dohUrlInput = document.querySelector('input[name="dohUrl"]');
     const dohUrlHint = document.getElementById("dohUrlHint");
     const dohLockNotice = document.getElementById("dohLockNotice");
-    const remoteResolversUrl = "https://raw.githubusercontent.com/Newipe/Dohcord/main/resolvers.json";
+    const remoteResolversUrl = "https://raw.githubusercontent.com/Newipe/Pishcord/main/resolvers.json";
 
     const defaultHint = dohUrlHint.textContent;
 
@@ -829,7 +829,7 @@
     }
 
     // Called by the main process with the packaged and custom profiles
-    window.__dohcordProfiles = profiles => {
+    window.__pishcordProfiles = profiles => {
         if (!Array.isArray(profiles)) return;
 
         const previous = profileSelectElement.value;
@@ -854,13 +854,13 @@
         applyDohLock();
     };
 
-    window.__dohcordProfileState = text => {
+    window.__pishcordProfileState = text => {
         setProfileStatus(text);
         submitButton.disabled = true;
         submitButton.textContent = "Connecting…";
     };
 
-    window.__dohcordProfileError = message => {
+    window.__pishcordProfileError = message => {
         setProfileStatus(message, true);
         submitButton.disabled = false;
         submitButton.textContent = "Get Started";

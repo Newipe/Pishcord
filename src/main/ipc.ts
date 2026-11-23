@@ -182,7 +182,7 @@ handle(IpcEvents.SELECT_VENCORD_DIR, async (_e, value?: null) => {
 handle(IpcEvents.SET_BADGE_COUNT, (_, count: number) => setBadgeCount(count));
 
 // Resolves a hostname through Chromium's own resolver, which is exactly the path
-// Dohcord network traffic takes. Bypassing the host cache makes sure the result
+// Pishcord network traffic takes. Bypassing the host cache makes sure the result
 // reflects the currently configured DoH server and not a previous lookup.
 handle(IpcEvents.DOH_RESOLVE_HOST, async (): Promise<DohTestResult> => {
     const start = performance.now();

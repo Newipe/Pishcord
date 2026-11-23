@@ -59,7 +59,7 @@ export function createFirstLaunchTour() {
     }
 
     function showProfileError(message: string) {
-        runInPage(`window.__dohcordProfileError?.(${JSON.stringify(message)})`);
+        runInPage(`window.__pishcordProfileError?.(${JSON.stringify(message)})`);
     }
 
     async function finishSetup(data: Data) {
@@ -78,7 +78,7 @@ export function createFirstLaunchTour() {
                 return;
             }
 
-            runInPage(`window.__dohcordProfileState?.("Retrieving the profile configuration…")`);
+            runInPage(`window.__pishcordProfileState?.("Retrieving the profile configuration…")`);
 
             // A profile is only accepted once its server configuration was fetched
             // and validated by the same code that applies it
@@ -161,7 +161,7 @@ export function createFirstLaunchTour() {
 
         if (msg === "profiles:init") {
             const profiles = getProfiles().map(({ id, name, description }) => ({ id, name, description }));
-            runInPage(`window.__dohcordProfiles?.(${JSON.stringify(profiles)})`);
+            runInPage(`window.__pishcordProfiles?.(${JSON.stringify(profiles)})`);
             return;
         }
 

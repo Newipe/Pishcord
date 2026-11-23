@@ -12,6 +12,14 @@ Encrypt your DNS lookups, defeat DNS-level censorship, and stay connected on res
 traffic through the built-in Newipe relay or your own compatible relay server. A profile supplies
 its own routing policy, and DoH is disabled while one is active.
 
+Dohcord builds on Vesktop, which provides:
+
+- Vencord preinstalled
+- Much more lightweight and faster than the official Discord app
+- Linux Screenshare with sound & wayland
+- Much better privacy, since Discord has no access to your system
+- Global keybinds, including push to talk (see [Global Keybinds](#global-keybinds))
+
 [![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-5865F2?style=flat-square)](#installation)
 [![License](https://img.shields.io/badge/license-GPL--3.0--or--later-green?style=flat-square)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/Newipe/Dohcord?style=flat-square)](../../releases/latest)
@@ -28,6 +36,7 @@ its own routing policy, and DoH is disabled while one is active.
 - [How DoH Works](#how-doh-works)
 - [Restricted Networks](#restricted-networks)
 - [Connection Profiles](#connection-profiles)
+- [Global Keybinds](#global-keybinds)
 - [Installation](#installation)
 - [Enabling DoH](#enabling-doh)
 - [Recommended Resolvers](#recommended-resolvers)
@@ -526,6 +535,31 @@ not a full VPN: traffic patterns and IP-level blocks remain visible to your netw
 | macOS says the app is damaged        | Gatekeeper, not corruption. Right-click → **Open**, or run `xattr -cr /Applications/Dohcord.app`.                                                                           |
 
 ---
+
+## Global Keybinds
+
+Configure them in the Vesktop settings, or from Discord's Keybinds and Voice & Video settings.
+
+- **Windows, Linux (X11)**: Bind any keys or mouse buttons in the Vesktop keybind settings
+- **macOS**: Same as above, but Vesktop needs the Accessibility permission
+- **Linux (Wayland)**: Wayland doesn't let apps listen to global input. Enable global shortcuts in the Vesktop keybind settings and assign them in your system settings. This requires a desktop that supports the GlobalShortcuts portal, like GNOME or KDE
+
+You can also trigger actions from other programs, for example your compositor's keybinds:
+
+```sh
+vesktop --run-shortcut toggleMute
+# Append :down or :up to only press or release, e.g. for push to talk
+vesktop --run-shortcut pushToTalk:down
+vesktop --run-shortcut pushToTalk:up
+```
+
+For lower latency, send the same commands as lines to the socket at `$XDG_RUNTIME_DIR/vesktop.sock`:
+
+```sh
+echo "run-shortcut pushToTalk:down" | socat - UNIX-CONNECT:$XDG_RUNTIME_DIR/vesktop.sock
+```
+
+Run `vesktop --help` to see all actions.
 
 ## Building from Source
 

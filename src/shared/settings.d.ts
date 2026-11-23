@@ -6,6 +6,8 @@
 
 import type { Rectangle } from "electron";
 
+import type { KeyBind } from "./utils/keybind";
+
 export interface Settings {
     discordBranch: "stable" | "canary" | "ptb";
     transparencyOption: "none" | "mica" | "tabbed" | "acrylic";
@@ -50,7 +52,7 @@ export interface Settings {
 
     /**
      * The selected connection profile id, or undefined for a direct connection.
-     * Independent from the DoH settings above.
+     * DoH is disabled while a profile is selected.
      */
     profileId?: string;
 
@@ -68,6 +70,10 @@ export interface Settings {
         onlySpeakers?: boolean;
         onlyDefaultSpeakers?: boolean;
     };
+
+    keyBinds?: KeyBind[];
+    /** Wayland only. Whether to register our actions with the GlobalShortcuts portal */
+    globalShortcutsPortal?: boolean;
 }
 
 export interface State {

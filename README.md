@@ -102,12 +102,12 @@ So it can help when blocking is based on DNS or on the Discord hostname in SNI. 
 
 ### Profiles
 
-| Profile                            | What it is                                                                                         |
-| ---------------------------------- | -------------------------------------------------------------------------------------------------- |
-| **No Profile — Direct Connection** | A normal, direct Discord connection. DoH can be enabled.                                           |
-| **Newipe**                         | Built-in relay profile for restricted networks, including Iran. Nothing to configure.              |
-| **Newipe 2**                       | Backup relay. Use it when the main Newipe relay is unreachable.                                    |
-| **Custom**                         | Your own compatible Pishcord-relay server. Needs a profile name and a Network Configuration URL.   |
+| Profile                            | What it is                                                                                       |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------ |
+| **No Profile — Direct Connection** | A normal, direct Discord connection. DoH can be enabled.                                         |
+| **Newipe**                         | Built-in relay profile for restricted networks, including Iran. Nothing to configure.            |
+| **Newipe 2**                       | Backup relay. Use it when the main Newipe relay is unreachable.                                  |
+| **Custom**                         | Your own compatible Pishcord-relay server. Needs a profile name and a Network Configuration URL. |
 
 ### Use a built-in profile
 
@@ -223,12 +223,12 @@ Pishcord keeps its settings in `settings.json` in the app's data directory:
 
 If you can't get to the settings window (say, Discord won't load), quit Pishcord and edit the file by hand.
 
-| Key                | Type      | Default | Description                                                   |
-| ------------------ | --------- | ------- | ------------------------------------------------------------- |
-| `enableDoh`        | `boolean` | `false` | Turn DoH on. Ignored while a profile is selected.             |
-| `dohUrl`           | `string`  | —       | The DoH resolver URL.                                         |
-| `dohAllowFallback` | `boolean` | `false` | Allow ordinary DNS if DoH is unavailable.                     |
-| `profileId`        | `string`  | —       | The selected profile's ID. Omit it or use `null` for Direct.  |
+| Key                | Type      | Default | Description                                                  |
+| ------------------ | --------- | ------- | ------------------------------------------------------------ |
+| `enableDoh`        | `boolean` | `false` | Turn DoH on. Ignored while a profile is selected.            |
+| `dohUrl`           | `string`  | —       | The DoH resolver URL.                                        |
+| `dohAllowFallback` | `boolean` | `false` | Allow ordinary DNS if DoH is unavailable.                    |
+| `profileId`        | `string`  | —       | The selected profile's ID. Omit it or use `null` for Direct. |
 
 For example, DoH with Quad9 and no profile:
 
@@ -266,16 +266,16 @@ Share the profile name and its Network Configuration URL. Don't copy temporary T
 
 ### Something's not working
 
-| Problem                                  | What to try                                                                                               |
-| ---------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| Custom resolver shows **Incomplete**     | Enter a valid `https://` URL, then press Enter or choose a provider.                                      |
-| **Test Resolution** fails                | Make sure the resolver is reachable, then try a different provider.                                       |
-| Discord won't load after enabling DoH    | Try another resolver. Only turn on **Allow Insecure Fallback** if you're okay with ordinary DNS.          |
-| Discord is stuck connecting              | The address it got back may be blocked on your network. Try a resolver or profile built for your network. |
-| Profile shows **Unavailable**            | Check the relay and its Network Configuration endpoint, click **Retry**, or select **No Profile**.        |
-| Profile shows **Invalid config**         | Check the configuration and temporary credentials the relay is returning.                                 |
-| Discord won't load with a profile        | Retry once the relay is reachable, or switch to **No Profile** in settings.                               |
-| macOS says the app is damaged            | Follow the Gatekeeper steps in [Installation](#installation).                                             |
+| Problem                               | What to try                                                                                               |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Custom resolver shows **Incomplete**  | Enter a valid `https://` URL, then press Enter or choose a provider.                                      |
+| **Test Resolution** fails             | Make sure the resolver is reachable, then try a different provider.                                       |
+| Discord won't load after enabling DoH | Try another resolver. Only turn on **Allow Insecure Fallback** if you're okay with ordinary DNS.          |
+| Discord is stuck connecting           | The address it got back may be blocked on your network. Try a resolver or profile built for your network. |
+| Profile shows **Unavailable**         | Check the relay and its Network Configuration endpoint, click **Retry**, or select **No Profile**.        |
+| Profile shows **Invalid config**      | Check the configuration and temporary credentials the relay is returning.                                 |
+| Discord won't load with a profile     | Retry once the relay is reachable, or switch to **No Profile** in settings.                               |
+| macOS says the app is damaged         | Follow the Gatekeeper steps in [Installation](#installation).                                             |
 
 ---
 

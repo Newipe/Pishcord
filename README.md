@@ -234,10 +234,10 @@ For example, DoH with Quad9 and no profile:
 
 ```json
 {
-  "enableDoh": true,
-  "dohUrl": "https://dns.quad9.net/dns-query",
-  "dohAllowFallback": false,
-  "profileId": null
+    "enableDoh": true,
+    "dohUrl": "https://dns.quad9.net/dns-query",
+    "dohAllowFallback": false,
+    "profileId": null
 }
 ```
 
